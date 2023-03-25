@@ -55,6 +55,7 @@ sudo systemctl status docker
 Adicione seu usuário ao grupo docker para evitar ter que usar sudo com cada comando Docker. Para fazer isso, execute o seguinte comando:
 </p>
 sudo usermod -aG docker ${USER}
+</p>
 Faça o logout e login novamente para que as alterações sejam aplicadas.
 </p>
 
@@ -69,9 +70,9 @@ sudo docker pull portainer/portainer-ce
 Crie um volume para persistir os dados do Portainer, como contêineres, imagens e outros dados. Para fazer isso, execute o seguinte comando:
 
 </p>
-
 sudo docker volume create portainer_data
 </p>
+
 Inicie o contêiner do Portainer com o seguinte comando:
 
 sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
@@ -82,6 +83,60 @@ Isso iniciará o contêiner do Portainer e ele estará acessível através do en
 
 http://123.45.67.89:9000
 Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
+
+----------------------------------------------------------------------------
+
+**Ativando SSL OPCIONAL**
+
+</p>
+sudo apt install nginx
+</p>
+sudo rm /etc/nginx/sites-enabled/default
+</p>
+sudo nano /etc/nginx/sites-available/portainer
+</p></p>
+server {
+</p>
+  server_name portainer.socialatendimento.com.br;
+</p>
+  location / {
+</p>
+    proxy_pass http://127.0.0.1:9000;
+</p>
+    proxy_http_version 1.1;
+</p>
+    proxy_set_header Upgrade $http_upgrade;
+</p>
+    proxy_set_header Connection 'upgrade';
+</p></p>
+    proxy_set_header Host $host;
+</p>
+    proxy_set_header X-Real-IP $remote_addr;
+</p>
+    proxy_set_header X-Forwarded-Proto $scheme;
+</p>
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</p>
+    proxy_cache_bypass $http_upgrade;
+</p></p>
+  }
+</p>
+   }
+   </p>
+ sudo ln -s /etc/nginx/sites-available/portainer /etc/nginx/sites-enabled
+</p>
+sudo service nginx restart
+</p>
+sudo apt-get install snapd
+</p>
+sudo snap install notes
+</p>
+sudo snap install --classic certbot
+</p>
+sudo certbot --nginx
+</p>
+sudo service nginx restart
+</p>
 
 ----------------------------------------------------------------------------
 
