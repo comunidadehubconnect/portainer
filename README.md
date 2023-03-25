@@ -52,9 +52,6 @@ sudo systemctl start docker
 Verifique se o serviço do Docker está em execução com o seguinte comando:
 </p>
 sudo systemctl status docker
-Adicione seu usuário ao grupo docker para evitar ter que usar sudo com cada comando Docker. Para fazer isso, execute o seguinte comando:
-</p>
-sudo usermod -aG docker ${USER}
 </p>
 Faça o logout e login novamente para que as alterações sejam aplicadas.
 </p>
