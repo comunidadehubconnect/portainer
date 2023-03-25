@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://github.com/sufficit/sufficit-quepasa/raw/main/src/assets/favicon.png" alt="Quepasa-logo" width="100" />	
+	<img src="https://www.portainer.io/hubfs/portainer-logo-black.svg" alt="Quepasa-logo" width="100" />	
 	<p align="center">Quepasa é um software de código aberto, totalmente gratuito, para troca de mensagens com a plataforma Whatsapp</p>
 </p>
 <hr />
