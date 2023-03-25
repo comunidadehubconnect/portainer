@@ -81,7 +81,7 @@ Isso iniciará o contêiner do Portainer e ele estará acessível através do en
 
 </p>
 
-http://123.45.67.89:9000
+http://ip:9000
 Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
 
 ----------------------------------------------------------------------------
