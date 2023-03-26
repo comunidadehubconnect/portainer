@@ -64,6 +64,48 @@ Faça o logout e login novamente para que as alterações sejam aplicadas.
 
 ----------------------------------------------------------------------------
 
+**Ativando SSL OPCIONAL**
+
+sudo apt install nginx -y
+</p>
+sudo rm /etc/nginx/sites-enabled/default
+</p>
+sudo nano /etc/nginx/sites-available/portainer
+</p>
+
+```
+server {
+  server_name portainer.seudominio.com.br;
+  location / {
+    proxy_pass http://127.0.0.1:9000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_cache_bypass $http_upgrade;
+  }
+   }
+ ```
+   
+</p>
+ sudo ln -s /etc/nginx/sites-available/portainer /etc/nginx/sites-enabled
+</p>
+sudo apt-get install snapd -y
+</p>
+sudo snap install notes
+</p>
+sudo snap install --classic certbot
+</p>
+sudo certbot --nginx
+</p>
+sudo service nginx restart
+</p>
+
+----------------------------------------------------------------------------
+
 **Baixe o contêiner do Portainer com o seguinte comando:**
 
 </p>
@@ -84,54 +126,11 @@ Isso iniciará o contêiner do Portainer e ele estará acessível através do en
 
 </p>
 
-http://ip:9000
+https://seusite
 Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
 
 ----------------------------------------------------------------------------
 
-**Ativando SSL OPCIONAL**
-
-sudo apt install nginx -y
-</p>
-sudo rm /etc/nginx/sites-enabled/default
-</p>
-sudo nano /etc/nginx/sites-available/portainer
-</p>
-
-```
-server {
-  server_name portainer.socialatendimento.com.br;
-  location / {
-    proxy_pass http://127.0.0.1:9000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_cache_bypass $http_upgrade;
-  }
-   }
- ```
-   
-</p>
- sudo ln -s /etc/nginx/sites-available/portainer /etc/nginx/sites-enabled
-</p>
-sudo service nginx restart
-</p>
-sudo apt-get install snapd
-</p>
-sudo snap install notes
-</p>
-sudo snap install --classic certbot
-</p>
-sudo certbot --nginx
-</p>
-sudo service nginx restart
-</p>
-
-----------------------------------------------------------------------------
 
 </p>
 
