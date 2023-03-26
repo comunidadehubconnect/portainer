@@ -49,7 +49,7 @@ sudo apt update && apt upgrade -y
 **Instale o Docker em sua VPS. Você pode fazer isso com o seguinte comando:**
 
 
-sudo apt install docker.io
+sudo apt install docker.io -y
 </p>
 Inicie o serviço do Docker com o seguinte comando:
 </p>
@@ -91,10 +91,12 @@ Você será direcionado para a página de login do Portainer, onde poderá criar
 
 **Ativando SSL OPCIONAL**
 
-sudo apt install nginx
+sudo apt install nginx -y
+</p>
 sudo rm /etc/nginx/sites-enabled/default
+</p>
 sudo nano /etc/nginx/sites-available/portainer
-
+</p>
 
 ```
 server {
