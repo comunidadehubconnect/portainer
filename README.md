@@ -24,9 +24,15 @@
 <img src="https://github.com/EngajamentoFlow/quepasa/blob/main/Contribui%C3%A7%C3%A3o.png" alt="Quepasa-logo" width="200" />
 </p>
 
-**Manual de Instalação Portainer**
+**PIX CNPJ**
+
+```
+45959142000119	
+```
 
 ----------------------------------------------------------------------------
+
+**Manual de Instalação Portainer**
 
 **Para instalar o Portainer em uma VPS com Ubuntu 20.04, você pode seguir os seguintes passos**
 
@@ -85,41 +91,28 @@ Você será direcionado para a página de login do Portainer, onde poderá criar
 
 **Ativando SSL OPCIONAL**
 
-</p>
 sudo apt install nginx
-</p>
 sudo rm /etc/nginx/sites-enabled/default
-</p>
 sudo nano /etc/nginx/sites-available/portainer
-</p></p>
+
+
+```
 server {
-</p>
   server_name portainer.socialatendimento.com.br;
-</p>
   location / {
-</p>
     proxy_pass http://127.0.0.1:9000;
-</p>
     proxy_http_version 1.1;
-</p>
     proxy_set_header Upgrade $http_upgrade;
-</p>
     proxy_set_header Connection 'upgrade';
-</p></p>
     proxy_set_header Host $host;
-</p>
     proxy_set_header X-Real-IP $remote_addr;
-</p>
     proxy_set_header X-Forwarded-Proto $scheme;
-</p>
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-</p>
     proxy_cache_bypass $http_upgrade;
-</p></p>
   }
-</p>
    }
-   </p>
+   
+</p>
  sudo ln -s /etc/nginx/sites-available/portainer /etc/nginx/sites-enabled
 </p>
 sudo service nginx restart
@@ -141,6 +134,13 @@ sudo service nginx restart
 
 **Gostou do Tutorial? Faça sua Contribuição**
 
-<img src="https://github.com/EngajamentoFlow/quepasa/blob/main/Contribui%C3%A7%C3%A3o.png" alt="Quepasa-logo" width="200" />
+<img src="https://github.com/EngajamentoFlow/quepasa/blob/main/Contribui%C3%A7%C3%A3o.png" alt="portainer-logo" width="200" />
 </p>
+
+**PIX CNPJ**
+
+```
+45959142000119	
+```
+
 ----------------------------------------------------------------------------
