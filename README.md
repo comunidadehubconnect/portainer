@@ -125,6 +125,8 @@ sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart always -
 Isso iniciará o contêiner do Portainer e ele estará acessível através do endereço IP da sua VPS na porta 9000. Por exemplo, se o endereço IP da sua VPS for IP, você poderá acessar o Portainer abrindo um navegador da web e digitando o seguinte endereço:
 
 </p>
+sudo systemctl restart docker
+</p>
 
 https://seusite
 Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
