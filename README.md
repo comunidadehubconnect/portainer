@@ -1,36 +1,16 @@
 <p align="center">
-	<img src="https://www.portainer.io/hubfs/portainer-logo-black.svg" alt="Quepasa-logo" width="100" />	
-	<p align="center">Implante, configure, solucione problemas e proteja contêineres em minutos no Kubernetes, Docker, Swarm e Nomad em qualquer data center, nuvem, borda de rede ou dispositivo IIOT</p>
+<img src="https://cwmkt.com.br/wp-content/uploads/2023/08/logo-github-cwmkt.svg" alt="DispZap Whats Marketing" width="240" />
+<p align="center">Seja bem-vindo ao Guia de atualização do n8n, nodejs e quepasa 🚀</p>
 </p>
+  
+<p align="center">
+<img src="https://whatsapp.com/favicon.ico" alt="WhatsAPP-logo" width="32" />
+<span>Grupo WhatsaAPP: </span>
+<a href="https://link.cwmkt.com.br/grupo-whats" target="_blank">Grupo</a>
+</p>
+
 <hr />
-<p align="left">
-	<img src="https://telegram.org/favicon.ico" alt="Telegram-logo" width="32" />
-	<span>Grupo e Canal Telegram: </span>
-	<a href="https://t.me/quepasa_api" target="_blank">Grupo</a>
-	<span> || </span>
-	<a href="https://t.me/quepasa_channel" target="_blank">Canal</a>
-</p>
 <hr />
-<p align="left">
-	<img src="https://whatsapp.com/favicon.ico" alt="WhatsAPP-logo" width="32" />
-	<span>Grupo WhatsaAPP: </span>
-	<a href="https://chat.whatsapp.com/Cv5WfmujRzE09yQ6hagYim" target="_blank">Grupo</a>
-</p>
-----------------------------------------------------------------------------
-</p>
-
-**Gostou do Tutorial? Faça sua Contribuição**
-
-<img src="https://github.com/EngajamentoFlow/quepasa/blob/main/Contribui%C3%A7%C3%A3o.png" alt="Quepasa-logo" width="200" />
-</p>
-
-**PIX CNPJ**
-
-```
-45959142000119	
-```
-
-----------------------------------------------------------------------------
 
 **Manual de Instalação Portainer**
 
@@ -131,20 +111,3 @@ sudo systemctl restart docker
 https://seusite
 Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
 
-----------------------------------------------------------------------------
-
-
-</p>
-
-**Gostou do Tutorial? Faça sua Contribuição**
-
-<img src="https://github.com/EngajamentoFlow/quepasa/blob/main/Contribui%C3%A7%C3%A3o.png" alt="portainer-logo" width="200" />
-</p>
-
-**PIX CNPJ**
-
-```
-45959142000119	
-```
-
-----------------------------------------------------------------------------
