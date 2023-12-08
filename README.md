@@ -6,108 +6,94 @@
 <p align="center">
 <img src="https://whatsapp.com/favicon.ico" alt="WhatsAPP-logo" width="32" />
 <span>Grupo WhatsaAPP: </span>
-<a href="https://link.cwmkt.com.br/grupo-whats" target="_blank">Grupo</a>
+<a href="https://chat.whatsapp.com/HKHoKSdSLotICKr5GX2ARv" target="_blank">Grupo</a>
 </p>
 
 <hr />
 <hr />
 
-**Manual de Instalação Portainer**
 
-**Para instalar o Portainer em uma VPS com Ubuntu 20.04, você pode seguir os seguintes passos**
+**Atualizando Dependências**
 
-</p>
-Certifique-se de ter permissões de administrador em sua VPS.
-</p>
 Atualize os repositórios do Ubuntu executando o seguinte comando:
-</p>
+
 sudo apt update && apt upgrade -y
-</p>
+
 
 ----------------------------------------------------------------------------
 
-**Instale o Docker em sua VPS. Você pode fazer isso com o seguinte comando:**
+**Instale o Docker em sua VPS**
 
 
 sudo apt install docker.io -y
-</p>
+
 Inicie o serviço do Docker com o seguinte comando:
-</p>
-sudo systemctl start docker
-</p>
-Verifique se o serviço do Docker está em execução com o seguinte comando:
-</p>
-sudo systemctl status docker
-</p>
-Faça o logout e login novamente para que as alterações sejam aplicadas.
-</p>
+
 
 ----------------------------------------------------------------------------
 
-**Ativando SSL OPCIONAL**
+**Instalando Portainer**
 
-sudo apt install nginx -y
-</p>
-sudo rm /etc/nginx/sites-enabled/default
-</p>
-sudo nano /etc/nginx/sites-available/portainer
-</p>
+docker swarm init
+
+nano traefik.yml
+nano portainer.yml
+
+docker network create --driver=overlay ecosystem_network
+
+docker stack deploy --prune --resolve-image always -c traefik.yml traefik
+docker stack deploy --prune --resolve-image always -c portainer.yml portainer
 
 ```
-server {
-  server_name portainer.seudominio.com.br;
-  location / {
-    proxy_pass http://127.0.0.1:9000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_cache_bypass $http_upgrade;
-  }
-   }
+version: "3.8"
+
+services:
+
+  agent:
+    image: portainer/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - ecosystem_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    command: -H tcp://tasks.agent:9001 --tlsskipverify
+    volumes:
+      - portainer_volume:/data
+    networks:
+      - ecosystem_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=ecosystem_network"
+        - "traefik.http.routers.portainer.rule=Host(`seudominio.com.br`)"
+        - "traefik.http.routers.portainer.entrypoints=websecure"
+        - "traefik.http.routers.portainer.priority=1"
+        - "traefik.http.routers.portainer.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.portainer.service=portainer"
+        - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+networks:
+  ecosystem_network:
+    external: true
+    attachable: true
+    name: ecosystem_network
+
+volumes:
+  portainer_volume:
+    external: true
+    name: portainer_volume
+
  ```
-   
-</p>
- sudo ln -s /etc/nginx/sites-available/portainer /etc/nginx/sites-enabled
-</p>
-sudo apt-get install snapd -y
-</p>
-sudo snap install notes
-</p>
-sudo snap install --classic certbot
-</p>
-sudo certbot --nginx
-</p>
-sudo service nginx restart
-</p>
 
-----------------------------------------------------------------------------
-
-**Baixe o contêiner do Portainer com o seguinte comando:**
-
-</p>
-sudo docker pull portainer/portainer-ce
-</p>
-
-Crie um volume para persistir os dados do Portainer, como contêineres, imagens e outros dados. Para fazer isso, execute o seguinte comando:
-
-</p>
-sudo docker volume create portainer_data
-</p>
-
-Inicie o contêiner do Portainer com o seguinte comando:
-
-sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
-</p>
-Isso iniciará o contêiner do Portainer e ele estará acessível através do endereço IP da sua VPS na porta 9000. Por exemplo, se o endereço IP da sua VPS for IP, você poderá acessar o Portainer abrindo um navegador da web e digitando o seguinte endereço:
-
-</p>
-sudo systemctl restart docker
-</p>
-
-https://seusite
-Você será direcionado para a página de login do Portainer, onde poderá criar uma conta de usuário e começar a gerenciar seus contêineres Docker.
-
+Acesse URL de seu Site e Crie Usuario
