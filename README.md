@@ -37,14 +37,74 @@ Inicie o serviço do Docker com o seguinte comando:
 docker swarm init
 
 nano traefik.yml
+
+```bash
+version: "3.8"
+
+services:
+
+  traefik:
+    image: traefik:latest
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=ecosystem_network"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencryptresolver.acme.email=dev@cwmkt.com.br"
+      - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
+      - "--log.level=DEBUG"
+      - "--log.format=common"
+      - "--log.filePath=/var/log/traefik/traefik.log"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/traefik/access-log"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
+        - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+        - "traefik.http.routers.http-catchall.entrypoints=web"
+        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
+        - "traefik.http.routers.http-catchall.priority=1"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "traefik_certificates_volume:/etc/traefik/letsencrypt"
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+      - target: 443
+        published: 443
+        mode: host
+    networks:
+      - ecosystem_network
+
+volumes:
+  traefik_certificates_volume:
+    external: true
+    name: traefik_certificates_volume
+
+networks:
+  ecosystem_network:
+    external: true
+    name: ecosystem_network
+ ```
+
+
 nano portainer.yml
 
-docker network create --driver=overlay ecosystem_network
-
-docker stack deploy --prune --resolve-image always -c traefik.yml traefik
-docker stack deploy --prune --resolve-image always -c portainer.yml portainer
-
-```
+```bash
 version: "3.8"
 
 services:
@@ -95,5 +155,11 @@ volumes:
     name: portainer_volume
 
  ```
+
+docker network create --driver=overlay ecosystem_network
+
+docker stack deploy --prune --resolve-image always -c traefik.yml traefik
+docker stack deploy --prune --resolve-image always -c portainer.yml portainer
+
 
 Acesse URL de seu Site e Crie Usuario
