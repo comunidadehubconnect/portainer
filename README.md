@@ -17,26 +17,33 @@
 
 Atualize os repositórios do Ubuntu executando o seguinte comando:
 
+```bash
 sudo apt update && apt upgrade -y
-
+```
 
 ----------------------------------------------------------------------------
 
 **Instale o Docker em sua VPS**
 
-
+```bash
 sudo apt install docker.io -y
+```
 
+```bash
 Inicie o serviço do Docker com o seguinte comando:
-
+```
 
 ----------------------------------------------------------------------------
 
 **Instalando Portainer**
 
+```bash
 docker swarm init
+```
 
+```bash
 nano traefik.yml
+```
 
 ```bash
 version: "3.8"
@@ -101,8 +108,9 @@ networks:
     name: ecosystem_network
  ```
 
-
+```bash
 nano portainer.yml
+```
 
 ```bash
 version: "3.8"
@@ -156,10 +164,16 @@ volumes:
 
  ```
 
+```bash
 docker network create --driver=overlay ecosystem_network
+```
 
+```bash
 docker stack deploy --prune --resolve-image always -c traefik.yml traefik
-docker stack deploy --prune --resolve-image always -c portainer.yml portainer
+```
 
+```bash
+docker stack deploy --prune --resolve-image always -c portainer.yml portainer
+```
 
 Acesse URL de seu Site e Crie Usuario
