@@ -29,10 +29,6 @@ sudo apt update && apt upgrade -y
 sudo apt install docker.io -y
 ```
 
-```bash
-Inicie o serviço do Docker com o seguinte comando:
-```
-
 ----------------------------------------------------------------------------
 
 **Instalando Portainer**
