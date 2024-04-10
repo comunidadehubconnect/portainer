@@ -161,6 +161,10 @@ volumes:
  ```
 
 ```bash
+```
+
+docker swarm init
+```bash
 docker network create --driver=overlay ecosystem_network
 ```
 
