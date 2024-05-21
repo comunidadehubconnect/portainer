@@ -1,16 +1,13 @@
 <p align="center">
-<img src="https://cwmkt.com.br/wp-content/uploads/2023/08/logo-github-cwmkt.svg" alt="DispZap Whats Marketing" width="240" />
+<img src="https://cwmkt.com.br/wp-content/uploads/2024/04/logo_github.png" width="240" />
 <p align="center">Seja bem-vindo ao Guia de Instalação Portainer 🚀</p>
 </p>
   
 <p align="center">
 <img src="https://whatsapp.com/favicon.ico" alt="WhatsAPP-logo" width="32" />
 <span>Grupo WhatsaAPP: </span>
-<a href="https://chat.whatsapp.com/HKHoKSdSLotICKr5GX2ARv" target="_blank">Grupo</a>
+<a href="https://chat.whatsapp.com/K0HnkUZ41CYL8txpPWx2hO" target="_blank">Grupo</a>
 </p>
-
-<hr />
-<hr />
 
 
 **Atualizando Dependências**
@@ -47,7 +44,7 @@ version: "3.8"
 services:
 
   traefik:
-    image: traefik:latest
+    image: traefik:2.11.1
     command:
       - "--api.dashboard=true"
       - "--providers.docker.swarmMode=true"
